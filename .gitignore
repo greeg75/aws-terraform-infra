@@ -10,6 +10,11 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
+# Fichiers de variables Terraform locaux
+*.tfvars
+!*.tfvars.example
+*.tfvars.json
+
 # Secrets et configuration locale
 .env
 .env.*
