@@ -1,4 +1,6 @@
 resource "aws_ecr_repository" "app" {
+  #checkov:skip=CKV_AWS_136:Dev environment uses AWS-managed AES256 encryption to avoid additional KMS costs
+
   name                 = "aws-terraform-infra"
   image_tag_mutability = "IMMUTABLE"
   force_delete         = false
@@ -10,7 +12,7 @@ resource "aws_ecr_repository" "app" {
 
 
   encryption_configuration {
-    encryption_type = "KMS"
+    encryption_type = "AES256"
   }
 
 
