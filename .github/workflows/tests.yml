@@ -79,3 +79,34 @@ jobs:
 
       - name: Scan Terraform configuration
         run: checkov --directory terraform --framework terraform
+
+  build-and-push-docker-image:
+    name: Build and Push Docker Image to ECR
+    runs-on: ubuntu-latest
+    needs: [tests, terraform, security]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::923819676616:role/github-actions-ecr-publisher
+          aws-region: eu-west-3
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./app
+          file: ./app/Dockerfile
+          push: true
+          tags: 923819676616.dkr.ecr.eu-west-3.amazonaws.com/aws-terraform-infra:${{ github.sha }}
