@@ -9,6 +9,8 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+plan.txt
+tfplan
 
 # Fichiers de variables Terraform locaux
 *.tfvars
