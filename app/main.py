@@ -6,7 +6,8 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+env_file = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(env_file, override=False)
 
 db = SQLAlchemy()
 
