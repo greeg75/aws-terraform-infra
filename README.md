@@ -339,6 +339,22 @@ The backend bucket used during the V1 deployment was decommissioned following th
 > This chart visualizes the illustrative scenario above. It does not represent actual AWS billing data.
 
 ```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "pie1": "#14B8A6",
+    "pie2": "#3B82F6",
+    "pie3": "#6366F1",
+    "pie4": "#8B5CF6",
+    "pie5": "#F59E0B",
+    "pie6": "#64748B",
+    "pieTitleTextColor": "#E2E8F0",
+    "pieSectionTextColor": "#FFFFFF",
+    "pieLegendTextColor": "#E2E8F0",
+    "pieStrokeColor": "#1E293B",
+    "pieStrokeWidth": "2px"
+  }
+}}%%
 pie showData
     title Illustrative Monthly AWS Cost Scenario (€)
     "VPC Interface Endpoints" : 56.47
