@@ -3,7 +3,7 @@ resource "aws_ecr_repository" "app" {
 
   name                 = "aws-terraform-infra"
   image_tag_mutability = "IMMUTABLE"
-  force_delete         = true
+  force_delete         = false
 
 
   image_scanning_configuration {
