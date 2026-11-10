@@ -86,7 +86,7 @@ resource "aws_ecs_service" "app" {
   name            = "aws-terraform-infra-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.app.arn
-  desired_count   = 0
+  desired_count   = 2
   launch_type     = "FARGATE"
 
 
