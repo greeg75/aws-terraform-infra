@@ -55,7 +55,7 @@ resource "aws_db_instance" "primary" {
   performance_insights_enabled = false
   monitoring_interval          = 0
 
-  deletion_protection = false
+  deletion_protection = true
   skip_final_snapshot = true
 
   copy_tags_to_snapshot = true
@@ -95,7 +95,7 @@ resource "aws_db_instance" "replica" {
   auto_minor_version_upgrade = true
   apply_immediately          = true
 
-  deletion_protection = false
+  deletion_protection = true
   skip_final_snapshot = true
 
   copy_tags_to_snapshot = true
