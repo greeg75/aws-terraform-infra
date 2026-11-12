@@ -1,1 +1,2 @@
 aws_region = "eu-west-3"
+app_image_tag = "<git-sha-of-the-image-pushed-to-ecr>"

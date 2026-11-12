@@ -31,7 +31,7 @@ resource "aws_ecs_task_definition" "app" {
   container_definitions = jsonencode([
     {
       name      = "aws-terraform-infra-app"
-      image     = "923819676616.dkr.ecr.eu-west-3.amazonaws.com/aws-terraform-infra:421a6e042204cdc016b68e32d7fab91208a2edbc"
+      image     = "${aws_ecr_repository.app.repository_url}:${var.app_image_tag}"
       essential = true
 
 

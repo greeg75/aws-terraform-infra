@@ -9,3 +9,8 @@ variable "db_master_password" {
   type        = string
   sensitive   = true
 }
+
+variable "app_image_tag" {
+  description = "Tag (git SHA) of the application image to deploy from ECR"
+  type        = string
+}
