@@ -97,10 +97,11 @@ jobs:
       - name: Configure AWS credentials OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::923819676616:role/github-actions-ecr-publisher
+          role-to-assume: arn:aws:iam::${{vars.AWS_ACCOUNT_ID}}:role/github-actions-ecr-publisher
           aws-region: eu-west-3
 
       - name: Login to Amazon ECR
+        id : login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build and push Docker image

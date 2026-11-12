@@ -276,7 +276,7 @@ The CI/CD workflow consists of four main jobs:
 
 The workflow uses GitHub Actions OIDC to authenticate with AWS through temporary credentials, avoiding the need to store long-lived AWS access keys in GitHub Secrets.
 
-The image publishing job runs after the previous jobs succeed and only on pushes to the `main` branch.
+The image publishing job runs after the previous jobs succeed, only on the `main` branch, and only when the repository variable `PUBLISH_IMAGE` is set to `true`. Since the V1 infrastructure (including the OIDC role and the ECR repository) was decommissioned, this variable is left unset and the job is skipped.
 
 ![GitHub Actions CI/CD workflow](docs/screenshots/02-github-actions.png)
 
