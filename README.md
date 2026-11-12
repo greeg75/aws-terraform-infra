@@ -303,88 +303,38 @@ The backend bucket used during the V1 deployment was decommissioned following th
 ## 💰 Cost Analysis & Optimization
 
 > [!NOTE]
-> This section presents an illustrative monthly cost scenario for the **Version 1** AWS architecture running continuously in **Europe (Paris) — `eu-west-3`**.
->
-> The figures are approximate and were not generated with AWS Pricing Calculator or derived from AWS billing data. They are intended to highlight the main cost drivers of the architecture, based on 24/7 operation and a 30-day month (720 hours).
+> Monthly estimate for the **Version 1** architecture running continuously (24/7, 720 hours) in **Europe (Paris) — `eu-west-3`**, produced with the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=e15e45d16b8f6370c8c45d49033f347daca0ff5b) in November 2026. It is an estimate, not AWS billing data: actual costs depend on traffic, data processing, and pricing changes. The V1 infrastructure was destroyed after the project phase, so these figures describe a hypothetical continuous-operation scenario.
 
-### At a Glance
+### Estimated Monthly Cost
 
-| Illustrative monthly scenario |
-|:---:|
-| **€133.21** |
-
-### Illustrative Monthly Cost Scenario
-
-| AWS Service | Configuration | Illustrative Monthly Cost | Share |
+| AWS Service | Configuration | Monthly Cost (USD) | Share |
 |---|---|---:|---:|
-| VPC Interface Endpoints | 4 endpoints across 2 Availability Zones | €56.47 | 42.4% |
-| Amazon RDS | 2 × `db.t4g.micro` instances | €23.10 | 17.3% |
-| Amazon ECS Fargate | 2 tasks, 0.25 vCPU and 0.5 GB each | €18.99 | 14.3% |
-| Application Load Balancer | 720 operating hours | €16.95 | 12.7% |
-| Public IPv4 Addresses | Assumption: 2 addresses | €7.10 | 5.3% |
-| ALB Capacity Units | Assumption: 1 average LCU | €5.39 | 4.0% |
-| RDS Storage | 20 GB primary + 20 GB read replica | €4.72 | 3.5% |
-| AWS Secrets Manager | 1 configured secret | €0.39 | 0.3% |
-| Amazon ECR | Assumption: 1 GB of stored images | €0.10 | 0.1% |
-| Amazon CloudWatch | Assumption: usage within the applicable free allowance | €0.00 | 0.0% |
-| **Total** |  | **€133.21** | **100%** |
+| Amazon VPC | 4 Interface Endpoints across 2 Availability Zones + 2 public IPv4 addresses | $71.55 | 49.4% |
+| Amazon RDS for PostgreSQL | 2 × `db.t4g.micro` (primary + read replica), 20 GB gp3 each, Single-AZ | $31.60 | 21.8% |
+| AWS Fargate | 2 tasks, 0.25 vCPU and 0.5 GB each, running 24/7 | $21.61 | 14.9% |
+| Application Load Balancer | 1 ALB, low traffic | $19.57 | 13.5% |
+| AWS Secrets Manager | 1 secret | $0.40 | 0.3% |
+| Amazon ECR | 1 GB of stored images | $0.10 | 0.1% |
+| **Total** | | **$144.83** | **100%** |
 
 > [!TIP]
-> In this illustrative scenario, VPC Interface Endpoints are the largest cost driver, accounting for approximately **42%** of the estimated monthly total.
-
-### Illustrative Monthly Cost Distribution
-
-> [!NOTE]
-> This chart visualizes the illustrative scenario above. It does not represent actual AWS billing data.
-
-```mermaid
-%%{init: {
-  "theme": "base",
-  "themeVariables": {
-    "pie1": "#14B8A6",
-    "pie2": "#3B82F6",
-    "pie3": "#6366F1",
-    "pie4": "#8B5CF6",
-    "pie5": "#F59E0B",
-    "pie6": "#64748B",
-    "pieTitleTextColor": "#E2E8F0",
-    "pieSectionTextColor": "#FFFFFF",
-    "pieLegendTextColor": "#E2E8F0",
-    "pieStrokeColor": "#1E293B",
-    "pieStrokeWidth": "2px"
-  }
-}}%%
-pie showData
-    title Illustrative Monthly AWS Cost Scenario (€)
-    "VPC Interface Endpoints" : 56.47
-    "RDS (Instances + Storage)" : 27.82
-    "Application Load Balancer (Hours + LCU)" : 22.34
-    "ECS Fargate" : 18.99
-    "Public IPv4 Addresses" : 7.10
-    "Other (Secrets Manager, ECR)" : 0.49
-```
+> The Amazon VPC line (about 49% of the total) is mostly the four Interface Endpoints deployed across two Availability Zones, which makes them the largest cost driver of this architecture.
 
 ### Cost Optimization Considerations
 
 | Decision | Impact |
 |---|---|
-| **No NAT Gateway** | Private subnets reach selected AWS services through VPC Endpoints, avoiding NAT Gateway hourly and data-processing charges. |
+| **VPC Endpoints instead of a NAT Gateway** | Private connectivity to AWS services without internet egress. This is primarily a security and isolation choice: with 4 Interface Endpoints across 2 Availability Zones, it is not necessarily cheaper than a single NAT Gateway at low traffic (see Future Improvement Areas). |
 | **S3 Gateway Endpoint** | Private access to Amazon S3 with no endpoint hourly charge. |
 | **ECR Lifecycle Policy** | Keeps the latest 10 tagged images and removes untagged images after 7 days. |
 | **CloudWatch Log Retention** | Application logs are retained for 30 days. |
 | **Infrastructure Cleanup** | The V1 infrastructure was destroyed after the project phase to avoid ongoing charges. |
 
-### Important Assumptions
+### Assumptions
 
-> [!WARNING]
-> These amounts are illustrative only, not AWS billing data or a quote produced by AWS Pricing Calculator. Actual costs may differ significantly depending on AWS pricing changes, traffic, data processing, task runtime, database activity, log ingestion, storage volume, and deployed architecture.
-
-- Estimates exclude applicable taxes, domain registration, data-transfer charges, and other usage-based charges not explicitly quantified.
-- The VPC Interface Endpoint estimate represents four interface endpoint services deployed across two Availability Zones. Data-processing charges are not included.
-- The Public IPv4 and ALB Capacity Unit figures are assumptions for this scenario.
-- The CloudWatch estimate assumes log usage remains within the applicable free allowance.
-- The V1 infrastructure was decommissioned after the project phase; these figures describe a hypothetical continuous-operation scenario, not current running costs.
-
+- Amounts are in USD, as returned by the AWS Pricing Calculator.
+- Estimates exclude taxes, domain registration, data transfer, and other usage-based charges.
+- ALB traffic and Interface Endpoint data processing are assumed to be very low; CloudWatch Logs usage is assumed to stay within the free allowance and is not included.
 
 ## 🚀 Future Improvement Areas
 
