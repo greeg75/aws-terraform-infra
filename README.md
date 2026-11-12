@@ -438,22 +438,9 @@ The project strengthened my understanding of how cloud infrastructure, applicati
 
 ## 📝 Final Note
 
-This project represents an important step in my journey toward Cloud Engineering, DevOps, and Cloud Security.
+This project marks my transition from manual infrastructure management to Infrastructure as Code, and is part of my path toward Cloud Engineering, DevOps, and Cloud Security.
 
-Beyond the code, it represents my transition from manual infrastructure management to **Infrastructure as Code (IaC)**.
-
-In modern cloud environments, the ability to provision consistent, reproducible, and maintainable infrastructure through automation provides significant operational advantages.
-
-Through this project, I explored how to:
-
-1. **Standardize** infrastructure deployments through version-controlled Terraform configurations, reducing the risk of configuration inconsistencies.
-2. **Automate** infrastructure provisioning and application delivery workflows, reducing repetitive manual operations.
-3. **Secure** cloud environments through IAM permissions, OIDC authentication, network isolation, and repeatable security configurations.
-4. **Improve operational efficiency** by combining infrastructure automation, containerization, monitoring, and cost awareness.
-
-Overall, this project reflects an automation-first mindset focused on reliability, security, scalability, and operational efficiency in cloud environments.
-
-Version 1 established the technical foundation for future improvements, with a second version planned to further enhance automation, security, monitoring, and cost optimization.
+Version 1 established the technical foundation. A second version is planned to address the improvements listed in [Future Improvement Areas](#-future-improvement-areas): Terraform modules, continuous deployment, observability, and security hardening.
 
 
 ## 👤 Author
