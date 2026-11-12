@@ -1,5 +1,5 @@
 
-name: Tests Python et Terraform
+name: Tests and Terraform Checks
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Recover source code
+      - name: Checkout source code
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r app/requirements-dev.txt
 
-      - name: Launch automated tests
+      - name: Run automated tests
         working-directory: app
         run: python -m pytest -v
 
@@ -44,7 +44,7 @@ jobs:
         working-directory: terraform
 
     steps:
-      - name: Recover source code
+      - name: Checkout source code
         uses: actions/checkout@v4
 
       - name: Set up Terraform
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Recover source code
+      - name: Checkout source code
         uses: actions/checkout@v4
 
       - name: Set up Python

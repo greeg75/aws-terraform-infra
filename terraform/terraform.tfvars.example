@@ -1,2 +1,7 @@
-aws_region = "eu-west-3"
+aws_region    = "eu-west-3"
 app_image_tag = "<git-sha-of-the-image-pushed-to-ecr>"
+
+
+# Required, but never commit a real password: pass it through terraform.tfvars
+# (git-ignored) or the TF_VAR_db_master_password environment variable.
+# db_master_password = "<choose-a-strong-password>"
