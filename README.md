@@ -1,6 +1,6 @@
 # AWS Terraform Infrastructure
 
-> A containerized Flask application deployed on AWS with Terraform, Amazon ECS Fargate, Amazon RDS for PostgreSQL, private VPC connectivity, and GitHub Actions CI/CD.
+> A containerized application deployed on AWS with Terraform, Amazon ECS Fargate, Amazon RDS for PostgreSQL, private VPC connectivity, and a GitHub Actions CI pipeline.
 
 ## 📖 Table of Contents
 
