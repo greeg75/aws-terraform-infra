@@ -26,7 +26,6 @@
 - [Future Improvement Areas](#-future-improvement-areas)
 - [Project Outcomes](#-project-outcomes)
 - [References & Documentation](#-references--documentation)
-- [Key Learnings](#-key-learnings)
 - [Author](#-author)
 
 
@@ -412,13 +411,13 @@ This project provided hands-on experience in designing, deploying, and managing 
 
 The main outcomes include:
 
-- **Infrastructure as Code:** Designed and provisioned AWS infrastructure using Terraform, including networking, compute, database, and security components.
-- **Cloud Networking:** Implemented a multi-AZ VPC architecture with public and private subnets, controlled routing, Security Groups, and VPC Endpoints.
-- **Cloud Security:** Applied IAM least-privilege principles, GitHub Actions OIDC authentication, private service connectivity, and centralized secrets management.
-- **Containerization & Orchestration:** Packaged a Flask application with Docker and deployed it using Amazon ECS on AWS Fargate.
-- **CI/CD Automation:** Built a GitHub Actions workflow for automated testing, Terraform validation, security scanning, and Docker image publishing to Amazon ECR.
-- **Monitoring & Troubleshooting:** Integrated Amazon CloudWatch Logs and configured health checks to improve application visibility and support troubleshooting.
-- **Infrastructure Lifecycle Management:** Practiced infrastructure provisioning and cleanup, while considering AWS resource costs and avoiding unnecessary ongoing charges.
+- **Infrastructure as Code:** Designed, structured, validated, and provisioned AWS infrastructure with Terraform (networking, compute, database, and security), using an S3 remote state backend.
+- **Cloud Networking:** Implemented a multi-AZ VPC with public and private subnets, controlled routing, Security Groups, and VPC Endpoints as an alternative to a NAT Gateway.
+- **Cloud Security:** Applied IAM least-privilege principles, GitHub Actions OIDC federation (no long-lived AWS keys), private service connectivity, and AWS Secrets Manager integration with the ECS task definition (the secret value is provisioned separately).
+- **Containerization & Orchestration:** Packaged a Flask application with Docker and deployed it on Amazon ECS with AWS Fargate behind an Application Load Balancer.
+- **CI/CD Automation:** Built a GitHub Actions workflow for automated testing, Terraform validation, security scanning with Checkov, and opt-in Docker image publishing to Amazon ECR.
+- **Monitoring & Troubleshooting:** Used CloudWatch Logs and ALB health checks to investigate application behavior.
+- **Lifecycle & Cost Management:** Practiced infrastructure provisioning and cleanup, identified the main cost drivers (VPC Interface Endpoints), and destroyed the environment to avoid ongoing charges.
 
 The project strengthened my understanding of how cloud infrastructure, application deployment, networking, security, and automation work together within an AWS environment.
 
@@ -435,18 +434,6 @@ The project strengthened my understanding of how cloud infrastructure, applicati
 - [GitHub Actions OIDC with AWS](https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws)
 - [Docker Documentation](https://docs.docker.com/)
 
-
-## 🎓 Key Learnings
-
-This project helped me develop practical skills and a deeper understanding of several Cloud, DevOps, and Security concepts:
-
-- **Infrastructure as Code:** Learned to structure, validate, and manage AWS infrastructure using Terraform.
-- **Cloud Networking:** Gained practical experience with VPC design, subnet segmentation, routing, and private connectivity.
-- **Cloud Security:** Applied IAM least-privilege principles, OIDC federation, Security Groups, and secrets management.
-- **Containerization:** Learned to build, configure, and run containerized applications using Docker and Amazon ECS Fargate.
-- **CI/CD:** Implemented automated testing, infrastructure validation, security scanning, and container image publishing with GitHub Actions.
-- **Monitoring & Troubleshooting:** Used CloudWatch Logs and application health checks to investigate application behavior.
-- **Cost Management:** Developed an understanding of AWS pricing models, infrastructure lifecycle management, and resource cleanup.
 
 
 ## 📝 Final Note
